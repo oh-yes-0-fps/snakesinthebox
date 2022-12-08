@@ -7,6 +7,8 @@ from wpimath.geometry import Rotation2d, Translation2d, Pose2d
 from Constants import kSwerve
 import util.Conversions as Conversions
 
+from commands.Defaults.DefaultSwerve import DefaultSwerve
+DEFAULT_COMMAND = DefaultSwerve
 
 class SwerveModuleConstants:
     def __init__(self, drive_motor_id, angle_motor_id, can_coder_id, angle_offset) -> None:

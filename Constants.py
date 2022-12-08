@@ -7,10 +7,22 @@ from wpimath.trajectory import TrapezoidProfile
 from ctre import NeutralMode
 from subsystems.Swerve import SwerveModuleConstants
 from util.Conversions import inchesToMeters
+from enum import Enum
+
+from typing import Any
 
 STICK_DEADZONE = 0.05
 
-class kSwerve:
+class final:
+    def __setattr__(self, __name: str, __value: Any) -> None:
+        if __name == __name.upper():
+            pass
+        else:
+            super().__setattr__(__name, __value)
+
+class kSwerve(final):
+    def __setattr__(self, __name: str, __value: Any) -> None:
+        super().__setattr__(__name, __value)
 
     class kModule:
         def __init__(self, drive_motor_id:int, angle_motor_id:int, can_coder_id:int, angle_offset:float) -> None:
@@ -100,7 +112,28 @@ class kSwerve:
     # Back Right Module - Module 3
     Mod3 = kModule(7, 8, 24, 14.3)
 
+class kAquisition(final):
+    def __setattr__(self, __name: str, __value: Any) -> None:
+        super().__setattr__(__name, __value)
 
+    ACQUISITION_VELOCITY = 8000
+    LEFT_MOTOR_ID = 10
+    RIGHT_MOTOR_ID = 9
+    ARM_SOLENOID_ID = 0
+    PIDF = {"kP": 0.1, "kI": 0.0, "kD": 0.0, "kF": 0.05}
 
+class kIndex(final):
+    def __setattr__(self, __name: str, __value: Any) -> None:
+        super().__setattr__(__name, __value)
 
-    
+    INDEX_MOTOR_ID = 12
+    BB_ENTER_PIN = 11
+    BB_EXIT_PIN = 12
+    INDEX_PERCENTOUT = 0.33
+
+    class ChamberState(Enum):
+        EMPTY = 0
+        BOTTOM = 1
+        TOP = 1
+        FULL = 2
+

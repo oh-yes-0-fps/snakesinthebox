@@ -1,9 +1,9 @@
 from typing import Optional
 from commands2 import InstantCommand, Subsystem
 from wpilib import Joystick, XboxController
-from subsystems.Swerve import Swerve
+import subsystems.Swerve as Swerve
 from util.ButtonInterface import Button
-from commands.Defaults.DefaultSwerve import DefaultSwerve
+# from commands.Defaults.DefaultSwerve import DefaultSwerve
 
 
 class RobotSetup:
@@ -20,11 +20,11 @@ class RobotSetup:
             InstantCommand(lambda: print("Hello World!")))
 
     class Subsystems:
-        Swerve = Swerve()
+        Swerve = Swerve.Swerve()#🤓
 
         def get(self, subsystem: str) -> Optional[Subsystem]:
             return getattr(self, subsystem, None)
 
     def __init__(self) -> None:
-        self.Subsystems.Swerve.setDefaultCommand(DefaultSwerve(
+        self.Subsystems.Swerve.setDefaultCommand(Swerve.DEFAULT_COMMAND(
             self.Subsystems.Swerve, self.__driver, self.__yAxis_id, self.__xAxis_id, self.__rAxis_id, True, False))
