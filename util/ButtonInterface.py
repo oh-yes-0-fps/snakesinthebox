@@ -49,7 +49,7 @@ class Button:
 
     @staticmethod
     def addButtonWrapper(buttonFunc:Callable) -> None:
-        CommandScheduler.getInstance().addButton(buttonFunc)
+        CommandScheduler.getInstance().addButton(buttonFunc) #type: ignore
 
     def __init__(self, _humanInputDevice:GenericHID, _buttonNumber:int) -> None:
         self.__humanInputDevice = _humanInputDevice

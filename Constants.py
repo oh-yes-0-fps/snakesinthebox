@@ -1,4 +1,3 @@
-
 #Everything in here has to be static and caps
 from math import pi
 from wpimath.kinematics import SwerveDrive4Kinematics
@@ -130,10 +129,4 @@ class kIndex(final):
     BB_ENTER_PIN = 11
     BB_EXIT_PIN = 12
     INDEX_PERCENTOUT = 0.33
-
-    class ChamberState(Enum):
-        EMPTY = 0
-        BOTTOM = 1
-        TOP = 1
-        FULL = 2
 

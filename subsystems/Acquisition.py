@@ -1,9 +1,12 @@
 from commands2 import SubsystemBase
 from wpilib import PneumaticsModuleType, Solenoid
+from subsystems.Swerve import DEFAULT_COMMAND
 from util.McqWrappers import MCQ_TalonFX
 from ctre import ControlMode, NeutralMode
 from Constants import kAquisition
 
+from commands.Defaults.DefaultAcquisition import DefaultAcquisition
+DEFAULT_COMMAND = DefaultAcquisition
 
 class Acquisition(SubsystemBase):
     #----------Constant Attributes / SubClasses----------#
