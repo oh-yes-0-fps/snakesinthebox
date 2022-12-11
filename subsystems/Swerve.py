@@ -6,16 +6,12 @@ from wpimath.kinematics import SwerveModuleState, SwerveDrive4Odometry, ChassisS
 from wpimath.geometry import Rotation2d, Translation2d, Pose2d
 from Constants import kSwerve
 import util.Conversions as Conversions
+from Constants import SwerveModuleConstants
 
-from commands.Defaults.DefaultSwerve import DefaultSwerve
-DEFAULT_COMMAND = DefaultSwerve
+# from commands.Defaults.DefaultSwerve import DefaultSwerve
+# DEFAULT_COMMAND = DefaultSwerve
 
-class SwerveModuleConstants:
-    def __init__(self, drive_motor_id, angle_motor_id, can_coder_id, angle_offset) -> None:
-        self.drive_motor_id = drive_motor_id
-        self.angle_motor_id = angle_motor_id
-        self.can_coder_id = can_coder_id
-        self.angle_offset = angle_offset
+
 
 class CTRE_SwerveModuleState:
 
@@ -133,6 +129,7 @@ class Swerve(SubsystemBase):
 
     # ----------Initialization----------#
     def __init__(self) -> None:
+        super().__init__()
         self.gyro = WPI_Pigeon2(kSwerve.PIDGEON_ID, kSwerve.canivoreName)
         self.gyro.configFactoryDefault()
         self.zeroGyro()

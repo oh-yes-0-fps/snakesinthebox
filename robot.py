@@ -1,4 +1,4 @@
-from future import __annotations__ #make it less likely to crash on the version of python that roborio runs
+# from future import __annotations__ #make it less likely to crash on the version of python that roborio runs
 
 from commands2 import CommandScheduler
 import wpilib

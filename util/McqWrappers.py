@@ -1,5 +1,5 @@
 from ctre import SupplyCurrentLimitConfiguration, WPI_TalonFX, SensorInitializationStrategy
-from typing import overload
+# from typing import overload
 
 from wpilib import DigitalInput
 
@@ -7,8 +7,8 @@ from wpilib import DigitalInput
 class MCQ_TalonFX(WPI_TalonFX):
     """Wrapper for the WPI_TalonFX class to add some useful methods. I want this, fight me"""
 
-    def __init__(self, deviceNumber: int, canbus: str = '') -> None:
-        super().__init__(deviceNumber, canbus)
+    def __init__(self, _deviceNumber: int, _canbus: str = '') -> None:
+        super().__init__(_deviceNumber, _canbus)
         self.configFactoryDefault()
         self.configIntegratedSensorInitializationStrategy(
             SensorInitializationStrategy.BootToZero)
@@ -18,23 +18,23 @@ class MCQ_TalonFX(WPI_TalonFX):
             return True
         return False
 
-    def configPIDF(self, kP: float, kI: float, kD: float, kF: float = 0) -> None:
-        self.config_kP(0, kP)
-        self.config_kI(0, kI)
-        self.config_kD(0, kD)
-        self.config_kF(0, kF)
+    def configPIDF(self, _P: float, _I: float, _D: float, _F: float = 0) -> None:
+        self.config_kP(0, _P)
+        self.config_kI(0, _I)
+        self.config_kD(0, _D)
+        self.config_kF(0, _F)
 
-    def configPIDFdict(self, pidf: dict[str, float]):
-        self.configPIDF(pidf['kP'], pidf['kI'], pidf['kD'], pidf['kF'])
+    def configPIDFdict(self, _pidf: dict[str, float]):
+        self.configPIDF(_pidf['P'], _pidf['I'], _pidf['D'], _pidf['F'])
 
-    def configPeakOutput(self, percentOut: float, timeoutMs: int = 0) -> None:
+    def configPeakOutput(self, _percentOut: float, _timeoutMs: int = 0) -> None:
         """Applys in both directions"""
-        self.configPeakOutputForward(percentOut, timeoutMs)
-        self.configPeakOutputReverse(-percentOut, timeoutMs)
+        self.configPeakOutputForward(_percentOut, _timeoutMs)
+        self.configPeakOutputReverse(-_percentOut, _timeoutMs)
 
-    def configCurrentLimit(self, currentLimit: float, currentLimitTrigger: float, currentLimitTriggerTime: float) -> None:
+    def configCurrentLimit(self, _currentLimit: float, _currentLimitTrigger: float, _currentLimitTriggerTime: float) -> None:
         self.configSupplyCurrentLimit(SupplyCurrentLimitConfiguration(
-            True, currentLimit, currentLimitTrigger, currentLimitTriggerTime))
+            True, _currentLimit, _currentLimitTrigger, _currentLimitTriggerTime))
 
     # TODO: Add datalogging stuff here to remove clutter from subsystems
 
@@ -76,7 +76,7 @@ class MCQ_BeamBreak(DigitalInput):
         self.__prevValue = outVal
         return outVal
 
-    def wasJust(self, checkValue:bool) -> bool:
-        if self.__get() == checkValue and self.__prevValue != checkValue:
+    def wasJust(self, _checkValue:bool) -> bool:
+        if self.__get() == _checkValue and self.__prevValue != _checkValue:
             return True
         return False

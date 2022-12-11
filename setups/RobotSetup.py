@@ -5,7 +5,7 @@ import subsystems.Swerve as Swerve
 import subsystems.Index as Index
 import subsystems.Acquisition as Acquisition
 from util.ButtonInterface import Button
-# from commands.Defaults.DefaultSwerve import DefaultSwerve
+from commands.CommandDir import * #do this just to make imports here a lil cleaner
 
 
 class RobotSetup:
@@ -34,7 +34,7 @@ class RobotSetup:
             return getattr(self, subsystem, None)
 
     def __init__(self) -> None:
-        self.Subsystems.i_Swerve.setDefaultCommand(Swerve.DEFAULT_COMMAND(
+        self.Subsystems.i_Swerve.setDefaultCommand(cDefaultSwerve(
             self.Subsystems.i_Swerve, self.__driver, self.__yAxis_id, self.__xAxis_id, self.__rAxis_id, True, False))
-        self.Subsystems.i_Acquisition.setDefaultCommand(Acquisition.DEFAULT_COMMAND(self.Subsystems.i_Acquisition, self.Subsystems.i_Index))
-        self.Subsystems.i_Index.setDefaultCommand(Index.DEFAULT_COMMAND(self.Subsystems.i_Index))
+        self.Subsystems.i_Acquisition.setDefaultCommand(cDefaultAcquisition(self.Subsystems.i_Acquisition, self.Subsystems.i_Index))
+        self.Subsystems.i_Index.setDefaultCommand(cDefaultIndex(self.Subsystems.i_Index))

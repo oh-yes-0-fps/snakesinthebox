@@ -1,18 +1,18 @@
 from commands2 import SubsystemBase
 from wpilib import PneumaticsModuleType, Solenoid
-from subsystems.Swerve import DEFAULT_COMMAND
 from util.McqWrappers import MCQ_TalonFX
 from ctre import ControlMode, NeutralMode
 from Constants import kAquisition
 
-from commands.Defaults.DefaultAcquisition import DefaultAcquisition
-DEFAULT_COMMAND = DefaultAcquisition
+# from commands.Defaults.DefaultAcquisition import DefaultAcquisition
+# DEFAULT_COMMAND = DefaultAcquisition
 
 class Acquisition(SubsystemBase):
     #----------Constant Attributes / SubClasses----------#
 
     #----------Initialization----------#
     def __init__(self) -> None:
+        super().__init__()
         self.__motorMaster = MCQ_TalonFX(kAquisition.LEFT_MOTOR_ID)
         self.__motorFollower = MCQ_TalonFX(kAquisition.RIGHT_MOTOR_ID)
         self.__motorMaster.setInverted(True)

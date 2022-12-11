@@ -4,11 +4,9 @@ from wpimath.kinematics import SwerveDrive4Kinematics
 from wpimath.geometry import Translation2d
 from wpimath.trajectory import TrapezoidProfile
 from ctre import NeutralMode
-from subsystems.Swerve import SwerveModuleConstants
 from util.Conversions import inchesToMeters
-from enum import Enum
-
 from typing import Any
+
 
 STICK_DEADZONE = 0.05
 
@@ -18,6 +16,13 @@ class final:
             pass
         else:
             super().__setattr__(__name, __value)
+
+class SwerveModuleConstants:
+    def __init__(self, drive_motor_id, angle_motor_id, can_coder_id, angle_offset) -> None:
+        self.drive_motor_id = drive_motor_id
+        self.angle_motor_id = angle_motor_id
+        self.can_coder_id = can_coder_id
+        self.angle_offset = angle_offset
 
 class kSwerve(final):
     def __setattr__(self, __name: str, __value: Any) -> None:
@@ -119,7 +124,7 @@ class kAquisition(final):
     LEFT_MOTOR_ID = 10
     RIGHT_MOTOR_ID = 9
     ARM_SOLENOID_ID = 0
-    PIDF = {"kP": 0.1, "kI": 0.0, "kD": 0.0, "kF": 0.05}
+    PIDF = {"P": 0.1, "I": 0.0, "D": 0.0, "F": 0.05}
 
 class kIndex(final):
     def __setattr__(self, __name: str, __value: Any) -> None:

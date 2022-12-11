@@ -4,7 +4,7 @@ from commands2 import Command, CommandScheduler
 from wpilib.interfaces._interfaces import GenericHID
 
 #Don't change this
-__KITERUPTIBLE = True
+__ITERUPTIBLE = True
 
 #TODO: actually just copy wpilibJ and separate trigger and button so u can do "#or", "#and", "#negate", "#debounce"
 #      ideally make it so code that uses this interface doesn't have to be changed in any way
@@ -22,11 +22,11 @@ class ButtonFunc:
     def __call__(self) -> None:
         if self.__condition == "whenPressed":
             if not self.__lastPressed and self.get():
-                self.__command.schedule(__KITERUPTIBLE)
+                self.__command.schedule(__ITERUPTIBLE)
             self.__lastPressed = self.get()
         elif self.__condition == "whenReleased":
             if self.__lastPressed and not self.get():
-                self.__command.schedule(__KITERUPTIBLE)
+                self.__command.schedule(__ITERUPTIBLE)
             self.__lastPressed = self.get()
         elif self.__condition == "whileHeld":
             if self.get():
@@ -36,7 +36,7 @@ class ButtonFunc:
                 if self.__command.isScheduled():
                     self.__command.cancel()
                 else:
-                    self.__command.schedule(__KITERUPTIBLE)
+                    self.__command.schedule(__ITERUPTIBLE)
             self.__lastPressed = self.get()
         elif self.__condition == "cancelWhenPressed":
             if not self.__lastPressed and self.get() and self.__command.isScheduled():
@@ -48,8 +48,8 @@ class ButtonFunc:
 class Button:
 
     @staticmethod
-    def addButtonWrapper(buttonFunc:Callable) -> None:
-        CommandScheduler.getInstance().addButton(buttonFunc) #type: ignore
+    def addButtonWrapper(_buttonFunc:Callable) -> None:
+        CommandScheduler.getInstance().addButton(_buttonFunc) #type: ignore
 
     def __init__(self, _humanInputDevice:GenericHID, _buttonNumber:int) -> None:
         self.__humanInputDevice = _humanInputDevice

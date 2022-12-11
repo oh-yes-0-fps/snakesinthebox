@@ -8,6 +8,7 @@ class SS_template(SubsystemBase):
 
     #----------Initialization----------#
     def __init__(self) -> None:
+        super().__init__()
         pass
     #----------Static Methods----------#
 

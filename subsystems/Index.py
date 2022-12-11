@@ -4,8 +4,8 @@ from Constants import kIndex
 from enum import Enum
 from util.McqWrappers import MCQ_TalonFX, MCQ_BeamBreak
 
-from commands.Defaults.DefaultIndex import DefaultIndex
-DEFAULT_COMMAND = DefaultIndex
+# from commands.Defaults.DefaultIndex import DefaultIndex
+# DEFAULT_COMMAND = DefaultIndex
 
 class ChamberState(Enum):
     EMPTY = 0
@@ -16,6 +16,7 @@ class ChamberState(Enum):
 class Index(SubsystemBase):
     #----------Initialization----------#
     def __init__(self) -> None:
+        super().__init__()
         self.__motor = MCQ_TalonFX(kIndex.INDEX_MOTOR_ID)
         self.__bbEnter = MCQ_BeamBreak(kIndex.BB_ENTER_PIN)
         self.__bbExit = MCQ_BeamBreak(kIndex.BB_EXIT_PIN)
@@ -29,8 +30,9 @@ class Index(SubsystemBase):
         pass
 
     #----------Instance Methods----------#
-    def startMotor(self) -> None:
-        self.__motor.set(ControlMode.PercentOutput, kIndex.INDEX_PERCENTOUT)
+    def startMotor(self, _speedMult:float = 1) -> None:
+        """supports negative speeds for reverse indexing"""
+        self.__motor.set(ControlMode.PercentOutput, kIndex.INDEX_PERCENTOUT*_speedMult)
 
     def stopMotor(self) -> None:
         self.__motor.stopMotor()
